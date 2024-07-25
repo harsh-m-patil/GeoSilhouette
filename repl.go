@@ -26,8 +26,10 @@ func repl() {
 		words := cleanInput(reader.Text())
 
 		if len(words) == 0 || words[0] != country {
+
 			scoreCard.CurrentScore -= 10
-			fmt.Printf("You lost!! It was %s\n\n", country)
+			countryName := getCountryName(country)
+			fmt.Printf("You lost!! It was %s(%s)\n\n", countryName, country)
 
 			if scoreCard.CurrentScore == 0 {
 				exitAndPrintScore(scoreCard)
