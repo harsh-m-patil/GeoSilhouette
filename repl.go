@@ -21,23 +21,23 @@ func repl() {
 
 		fmt.Print(string(data))
 
-		fmt.Printf("\nGeoSilhoutte (%d) > ", scoreCard.CurrentScore)
+		fmt.Printf("\nGeoSilhoutte (%d) > ", scoreCard.LivesLeft)
 		reader.Scan()
 		words := cleanInput(reader.Text())
 
 		if len(words) == 0 || words[0] != country {
-
-			scoreCard.CurrentScore -= 10
+			scoreCard.LivesLeft--
+			scoreCard.Wrong++
 			countryName := getCountryName(country)
 			fmt.Printf("You lost!! It was %s(%s)\n\n", countryName, country)
 
-			if scoreCard.CurrentScore == 0 {
+			if scoreCard.LivesLeft == 0 {
 				exitAndPrintScore(scoreCard)
 			}
-
 			continue
 		} else {
-			scoreCard.CurrentScore += 10
+			scoreCard.LivesLeft++
+			scoreCard.Right++
 			fmt.Println("You won")
 		}
 
@@ -48,6 +48,7 @@ func repl() {
 }
 
 func exitAndPrintScore(scoreCard *datatypes.ScoreCard) {
-	fmt.Printf("Your final score is %d\n", scoreCard.CurrentScore)
+	fmt.Printf("Right Guesses : %d\n", scoreCard.Right)
+	fmt.Printf("Wrong Guesses : %d\n", scoreCard.Wrong)
 	exit()
 }
