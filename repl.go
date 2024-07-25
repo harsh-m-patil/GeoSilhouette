@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/harsh-m-patil/GeoSilhouette/internals/types"
+	"github.com/harsh-m-patil/GeoSilhouette/internal/datatypes"
 )
 
 func repl() {
 	reader := bufio.NewScanner(os.Stdin)
-	scoreCard := types.NewScoreCard()
+	scoreCard := datatypes.NewScoreCard()
 	for {
 		country := countryMaps()
 
@@ -45,7 +45,7 @@ func repl() {
 	}
 }
 
-func exitAndPrintScore(scoreCard *types.ScoreCard) {
+func exitAndPrintScore(scoreCard *datatypes.ScoreCard) {
 	fmt.Printf("Your final score is %d\n", scoreCard.CurrentScore)
 	exit()
 }
