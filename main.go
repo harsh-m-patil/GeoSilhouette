@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"os"
 	"strings"
 )
@@ -10,7 +11,8 @@ func main() {
 }
 
 func exit() {
-	os.Exit(0)
+	defer os.Exit(0)
+	fmt.Println("Exitting")
 }
 
 func cleanInput(str string) []string {
