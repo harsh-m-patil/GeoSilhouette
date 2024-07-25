@@ -21,3 +21,4 @@ GeoSilhouette
 # Go workspace file
 go.work
 go.work.sum
+*.tape

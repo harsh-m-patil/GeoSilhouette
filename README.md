@@ -2,6 +2,10 @@ GeoSilhouette
 
 > CLI based country guesser game
 
+## Demo
+
+![Demo GIF](./assets/demo.gif)
+
 ## Installation
 
 ### Clone the Repo
