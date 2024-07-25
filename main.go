@@ -1,28 +1,51 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math/rand"
 	"os"
+	"strings"
 )
 
 func main() {
-	country := countryMaps()
-	data, err := os.ReadFile("./ascii-countries/40-wide/" + country + ".txt")
-	if err != nil {
-		fmt.Printf("Error reading file %v", err)
-	}
-	fmt.Print(string(data))
-	var guess string
-	fmt.Printf("\nGuess : ")
-	fmt.Scanf("%s", &guess)
+	reader := bufio.NewScanner(os.Stdin)
+	for {
+		country := countryMaps()
+		data, err := os.ReadFile("./ascii-countries/40-wide/" + country + ".txt")
+		if err != nil {
+			fmt.Printf("Error reading file %v", err)
+		}
+		fmt.Print(string(data))
+		fmt.Println("")
+		fmt.Print("GeoSilhoutte > ")
+		reader.Scan()
+		words := cleanInput(reader.Text())
 
-	if guess == country {
-		fmt.Println("You won")
-	} else {
-		fmt.Println("You lost")
-		fmt.Println("It was " + country)
+		if len(words) == 0 {
+			fmt.Printf("You lost!! It was %s\n\n", country)
+			continue
+		}
+
+		if words[0] == "exit" {
+			exit()
+		}
+		if words[0] == country {
+			fmt.Println("You won")
+		} else {
+			fmt.Printf("You lost!! It was %s", country)
+		}
 	}
+}
+
+func exit() {
+	os.Exit(0)
+}
+
+func cleanInput(str string) []string {
+	lowered := strings.ToLower(str)
+	words := strings.Fields(lowered)
+	return words
 }
 
 func countryMaps() string {
